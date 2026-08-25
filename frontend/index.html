@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./student-icon.png">
+    <title>Student Management System</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h1>Student Management System</h1>
+
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contacts</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="registration">
+            <h2>Register Student</h2>
+
+            <form>
+
+                <label for="firstname">Firstname</label>
+                <input 
+                    type="text" 
+                    id="firstname" 
+                    name="firstname"
+                    placeholder="Enter firstname"
+                >
+
+                <label for="lastname">Lastname</label>
+                <input 
+                    type="text" 
+                    id="lastname" 
+                    name="lastname"
+                    placeholder="Enter lastname"
+                >
+
+                <label for="phone">Phone Number</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone"
+                    placeholder="Enter phone number"
+                >
+
+                <label for="dateofbirth">Date of Birth</label>
+                <input 
+                    type="date" 
+                    id="dateofbirth" 
+                    name="dateofbirth"
+                >
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <button type="submit">Register a Student</button>
+
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>
