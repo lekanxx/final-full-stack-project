@@ -1,5 +1,5 @@
 # Student management sysytem
-This full stack will handle both frontend implementation with HTML5, CSS , JAVASCRIPT, MONGODBATLAS for the database 
+This full stack web application will handle both frontend implementation with HTML5, CSS , JAVASCRIPT, MONGODBATLAS for the database 
 
 ## Features 
 - Student registration form
