@@ -6,13 +6,16 @@ const logoutButton = document.getElementById("logoutButton");
 const searchStudent = document.getElementById("searchStudent");
 const studentCount = document.getElementById("studentCount");
 
-// Store students
+// Your deployed backend URL
+const API_URL = "https://final-full-stack-project-1.onrender.com";
+
+// Store all students
 let allStudents = [];
 
-// Get token
+// Get admin token
 const token = localStorage.getItem("adminToken");
 
-// Check login
+// Check if admin is logged in
 if (!token) {
     window.location.href = "./admin.html";
 }
@@ -39,6 +42,7 @@ searchStudent.addEventListener("input", function () {
         .toLowerCase();
 
     const filteredStudents = allStudents.filter(function (student) {
+
         const fullname =
             `${student.firstname || ""} ${student.lastname || ""}`
                 .toLowerCase();
@@ -65,9 +69,11 @@ searchStudent.addEventListener("input", function () {
 
 // Get students
 async function getStudents() {
+
     try {
+
         const response = await fetch(
-            "http://localhost:3000/students",
+            `${API_URL}/students`,
             {
                 headers: {
                     Authorization: "Bearer " + token
@@ -95,18 +101,21 @@ async function getStudents() {
         displayStudents(allStudents);
 
     } catch (error) {
+
         console.error(error);
 
         studentList.innerHTML =
-            "<p>Unable to load students. Make sure your server is running.</p>";
+            "<p>Unable to load students. Please try again later.</p>";
     }
 }
 
 // Display students
 function displayStudents(students) {
+
     studentList.innerHTML = "";
 
     if (students.length === 0) {
+
         studentList.innerHTML =
             "<p>No students found.</p>";
 
@@ -116,6 +125,7 @@ function displayStudents(students) {
     students.forEach(function (student) {
 
         studentList.innerHTML += `
+
             <div class="student-card">
 
                 <div class="student-header">
@@ -184,6 +194,7 @@ function displayStudents(students) {
                 </div>
 
             </div>
+
         `;
     });
 }
@@ -212,9 +223,6 @@ function editStudent(id) {
     document.getElementById("editLastname").value =
         student.lastname || "";
 
-    document.getElementById("editMatricNumber").value =
-        student.matricNumber || "";
-
     document.getElementById("editEmail").value =
         student.email || "";
 
@@ -227,10 +235,7 @@ function editStudent(id) {
     document.getElementById("editGender").value =
         student.gender || "";
 
-    document.getElementById("editAddress").value =
-        student.address || "";
-
-    // Show form
+    // Show edit form
     editSection.style.display = "block";
 
     editSection.scrollIntoView({
@@ -240,12 +245,14 @@ function editStudent(id) {
 
 // Update student
 editForm.addEventListener("submit", async function (event) {
+
     event.preventDefault();
 
     const id =
         document.getElementById("editId").value;
 
     const student = {
+
         studentId:
             document.getElementById("editStudentId")
                 .value
@@ -258,11 +265,6 @@ editForm.addEventListener("submit", async function (event) {
 
         lastname:
             document.getElementById("editLastname")
-                .value
-                .trim(),
-
-        matricNumber:
-            document.getElementById("editMatricNumber")
                 .value
                 .trim(),
 
@@ -282,17 +284,13 @@ editForm.addEventListener("submit", async function (event) {
 
         gender:
             document.getElementById("editGender")
-                .value,
-
-        address:
-            document.getElementById("editAddress")
                 .value
-                .trim()
     };
 
     try {
+
         const response = await fetch(
-            `http://localhost:3000/students/${id}`,
+            `${API_URL}/students/${id}`,
             {
                 method: "PUT",
 
@@ -308,6 +306,7 @@ editForm.addEventListener("submit", async function (event) {
         const data = await response.json();
 
         if (response.ok) {
+
             alert(
                 data.message ||
                 "Student updated successfully!"
@@ -320,6 +319,7 @@ editForm.addEventListener("submit", async function (event) {
             getStudents();
 
         } else {
+
             alert(
                 data.message ||
                 "Failed to update student."
@@ -327,6 +327,7 @@ editForm.addEventListener("submit", async function (event) {
         }
 
     } catch (error) {
+
         console.error(error);
 
         alert("Unable to connect to the server.");
@@ -345,8 +346,9 @@ async function deleteStudent(id) {
     }
 
     try {
+
         const response = await fetch(
-            `http://localhost:3000/students/${id}`,
+            `${API_URL}/students/${id}`,
             {
                 method: "DELETE",
 
@@ -359,6 +361,7 @@ async function deleteStudent(id) {
         const data = await response.json();
 
         if (response.ok) {
+
             alert(
                 data.message ||
                 "Student deleted successfully!"
@@ -367,6 +370,7 @@ async function deleteStudent(id) {
             getStudents();
 
         } else {
+
             alert(
                 data.message ||
                 "Failed to delete student."
@@ -374,6 +378,7 @@ async function deleteStudent(id) {
         }
 
     } catch (error) {
+
         console.error(error);
 
         alert("Unable to connect to the server.");

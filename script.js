@@ -1,6 +1,10 @@
 // Get form
 const form = document.getElementById("studentForm");
 
+// Backend URL
+const API_URL =
+    "https://final-full-stack-project-1.onrender.com";
+
 // Check form exists
 if (form) {
 
@@ -21,12 +25,14 @@ if (form) {
 
         try {
             const response = await fetch(
-                "http://localhost:3000/students",
+                `${API_URL}/students`,
                 {
                     method: "POST",
+
                     headers: {
                         "Content-Type": "application/json"
                     },
+
                     body: JSON.stringify(student)
                 }
             );
@@ -37,13 +43,20 @@ if (form) {
                 alert("Student registered successfully!");
 
                 form.reset();
+
             } else {
-                alert(data.message || "Failed to register student.");
+                alert(
+                    data.message ||
+                    "Failed to register student."
+                );
             }
 
         } catch (error) {
             console.error("Error:", error);
-            alert("Unable to connect to the server.");
+
+            alert(
+                "Unable to connect to the server."
+            );
         }
     });
 

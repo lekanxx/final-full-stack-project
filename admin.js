@@ -1,51 +1,84 @@
-const adminLoginForm = document.getElementById("adminLoginForm");
+const adminLoginForm =
+    document.getElementById("adminLoginForm");
 
-adminLoginForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
+// Backend URL
+const API_URL =
+    "https://final-full-stack-project-1.onrender.com";
 
-    const email = document.getElementById("adminEmail").value.trim();
-    const password = document.getElementById("adminPassword").value;
+// Admin login
+if (adminLoginForm) {
 
-    try {
-        const response = await fetch(
-            "http://localhost:3000/admin/login",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                })
+    adminLoginForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            const email =
+                document
+                    .getElementById("adminEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("adminPassword")
+                    .value;
+
+            try {
+
+                const response = await fetch(
+                    `${API_URL}/admin/login`,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+                const data =
+                    await response.json();
+
+                if (response.ok) {
+
+                    // Save admin token
+                    localStorage.setItem(
+                        "adminToken",
+                        data.token
+                    );
+
+                    alert(
+                        "Login successful!"
+                    );
+
+                    // Go to dashboard
+                    window.location.href =
+                        "./dashboard.html";
+
+                } else {
+
+                    alert(
+                        data.message ||
+                        "Login failed"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to connect to the server"
+                );
             }
-        );
-
-        const data = await response.json();
-
-        if (response.ok) {
-            localStorage.setItem(
-                "adminToken",
-                data.token
-            );
-
-            alert("Login successful!");
-
-            window.location.href =
-                "./dashboard.html";
-
-        } else {
-            alert(
-                data.message ||
-                "Login failed"
-            );
         }
-
-    } catch (error) {
-        console.error(error);
-
-        alert(
-            "Unable to connect to the server"
-        );
-    }
-});
+    );
+}

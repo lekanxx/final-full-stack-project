@@ -1,82 +1,94 @@
 const adminRegisterForm =
     document.getElementById("adminRegisterForm");
 
-adminRegisterForm.addEventListener(
-    "submit",
-    async function (event) {
+// Backend URL
+const API_URL =
+    "https://final-full-stack-project-1.onrender.com";
 
-        event.preventDefault();
+// Register admin
+if (adminRegisterForm) {
 
-        const name =
-            document.getElementById("adminName")
-                .value
-                .trim();
+    adminRegisterForm.addEventListener(
+        "submit",
+        async function (event) {
 
-        const email =
-            document.getElementById("adminEmail")
-                .value
-                .trim();
+            event.preventDefault();
 
-        const password =
-            document.getElementById("adminPassword")
-                .value;
+            const name =
+                document.getElementById("adminName")
+                    .value
+                    .trim();
 
-        const confirmPassword =
-            document.getElementById("confirmPassword")
-                .value;
+            const email =
+                document.getElementById("adminEmail")
+                    .value
+                    .trim();
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
+            const password =
+                document.getElementById("adminPassword")
+                    .value;
 
-        try {
+            const confirmPassword =
+                document.getElementById("confirmPassword")
+                    .value;
 
-            const response = await fetch(
-                "http://localhost:3000/admin/register",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        password: password
-                    })
-                }
-            );
-
-            const data =
-                await response.json();
-
-            if (response.ok) {
-
-                alert(
-                    "Admin registered successfully!"
-                );
-
-                window.location.href =
-                    "./admin.html";
-
-            } else {
-
-                alert(
-                    data.message ||
-                    "Failed to register admin"
-                );
+            // Check passwords
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
             }
 
-        } catch (error) {
+            try {
 
-            console.error(error);
+                const response = await fetch(
+                    `${API_URL}/admin/register`,
+                    {
+                        method: "POST",
 
-            alert(
-                "Unable to connect to the server"
-            );
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+                const data =
+                    await response.json();
+
+                if (response.ok) {
+
+                    alert(
+                        "Admin registered successfully!"
+                    );
+
+                    adminRegisterForm.reset();
+
+                    // Go to admin login
+                    window.location.href =
+                        "./admin.html";
+
+                } else {
+
+                    alert(
+                        data.message ||
+                        "Failed to register admin"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to connect to the server"
+                );
+            }
         }
-    }
-);
+    );
+}

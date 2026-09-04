@@ -1,9 +1,14 @@
 const messageList = document.getElementById("messageList");
 const logoutButton = document.getElementById("logoutButton");
 
-// Check admin login
+// Your deployed backend URL
+const API_URL =
+    "https://final-full-stack-project-1.onrender.com";
+
+// Get admin token
 const token = localStorage.getItem("adminToken");
 
+// Check admin login
 if (!token) {
     window.location.href = "./admin.html";
 }
@@ -23,8 +28,9 @@ document.addEventListener("DOMContentLoaded", getMessages);
 // Get messages
 async function getMessages() {
     try {
+
         const response = await fetch(
-            "http://localhost:3000/contacts",
+            `${API_URL}/contacts`,
             {
                 headers: {
                     Authorization: "Bearer " + token
@@ -32,9 +38,14 @@ async function getMessages() {
             }
         );
 
-        if (response.status === 401 || response.status === 403) {
+        if (
+            response.status === 401 ||
+            response.status === 403
+        ) {
             localStorage.removeItem("adminToken");
+
             window.location.href = "./admin.html";
+
             return;
         }
 
@@ -50,6 +61,7 @@ async function getMessages() {
         }
 
         messages.forEach(function (message) {
+
             messageList.innerHTML += `
                 <div class="message-card">
 
@@ -93,15 +105,17 @@ async function getMessages() {
         });
 
     } catch (error) {
+
         console.error(error);
 
         messageList.innerHTML =
-            "<p>Unable to load messages. Make sure your server is running.</p>";
+            "<p>Unable to load messages. Please try again later.</p>";
     }
 }
 
 // Save reply
 async function replyMessage(id) {
+
     const reply = document
         .getElementById(`reply-${id}`)
         .value
@@ -109,13 +123,13 @@ async function replyMessage(id) {
 
     if (!reply) {
         alert("Please write a reply first.");
-
         return;
     }
 
     try {
+
         const response = await fetch(
-            `http://localhost:3000/contacts/${id}/reply`,
+            `${API_URL}/contacts/${id}/reply`,
             {
                 method: "PUT",
 
@@ -133,23 +147,33 @@ async function replyMessage(id) {
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message);
+
+            alert(
+                data.message ||
+                "Reply saved successfully!"
+            );
 
             getMessages();
 
         } else {
-            alert(data.message || "Failed to save reply");
+
+            alert(
+                data.message ||
+                "Failed to save reply"
+            );
         }
 
     } catch (error) {
+
         console.error(error);
 
-        alert("Unable to connect to the server");
+        alert("Unable to connect to the server.");
     }
 }
 
 // Delete message
 async function deleteMessage(id) {
+
     const confirmDelete = confirm(
         "Are you sure you want to delete this message?"
     );
@@ -159,8 +183,9 @@ async function deleteMessage(id) {
     }
 
     try {
+
         const response = await fetch(
-            `http://localhost:3000/contacts/${id}`,
+            `${API_URL}/contacts/${id}`,
             {
                 method: "DELETE",
 
@@ -173,17 +198,26 @@ async function deleteMessage(id) {
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message);
+
+            alert(
+                data.message ||
+                "Message deleted successfully!"
+            );
 
             getMessages();
 
         } else {
-            alert(data.message || "Failed to delete message");
+
+            alert(
+                data.message ||
+                "Failed to delete message"
+            );
         }
 
     } catch (error) {
+
         console.error(error);
 
-        alert("Unable to connect to the server");
+        alert("Unable to connect to the server.");
     }
 }
