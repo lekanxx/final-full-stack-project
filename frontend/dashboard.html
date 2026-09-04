@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./student-icon.png">
+
+    <title>Admin Dashboard | Student Management System</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h1>Student Management System</h1>
+
+            <div class="nav-links">
+                <button id="logoutButton">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-main">
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-welcome">
+                <h2>Admin Dashboard</h2>
+                <p>Welcome back! Here is an overview of your school management system.</p>
+            </div>
+
+            <div class="statistics-container">
+
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍🎓</div>
+
+                    <div>
+                        <p>Total Students</p>
+                        <h3 id="totalStudents">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💬</div>
+
+                    <div>
+                        <p>Total Messages</p>
+                        <h3 id="totalMessages">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📩</div>
+
+                    <div>
+                        <p>New Messages</p>
+                        <h3 id="newMessages">0</h3>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+
+                    <div>
+                        <p>Replied Messages</p>
+                        <h3 id="repliedMessages">0</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-actions">
+
+                <a href="./students.html" class="dashboard-action-card">
+                    <h3>Student Management</h3>
+                    <p>View, edit and delete registered students.</p>
+                    <span>Manage Students →</span>
+                </a>
+
+                <a href="./messages.html" class="dashboard-action-card">
+                    <h3>Contact Messages</h3>
+                    <p>View and respond to messages from users.</p>
+                    <span>View Messages →</span>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="./dashboard.js"></script>
+
+</body>
+
+</html>

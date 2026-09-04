@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="./student-icon.png">
+
+    <title>Student Management | Bright Future Academy</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <nav>
+
+            <h1>Bright Future Academy</h1>
+
+            <div class="nav-links">
+                <a href="./dashboard.html">Dashboard</a>
+                
+                <button id="logoutButton">
+                    Logout
+                </button>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- Students -->
+    <main class="students-main">
+
+        <section class="students">
+
+            <div class="students-page-header">
+
+                <div>
+                    <h2>Student Management</h2>
+
+                    <p>
+                        View, search, edit and manage all registered students.
+                    </p>
+                </div>
+
+                <div class="student-count">
+                    <span>Total Students</span>
+
+                    <strong id="studentCount">0</strong>
+                </div>
+
+            </div>
+
+            <!-- Search -->
+            <div class="student-search">
+
+                <input
+                    type="text"
+                    id="searchStudent"
+                    placeholder="Search by name, student ID, matric number or email..."
+                >
+
+            </div>
+
+            <!-- Student list -->
+            <div id="studentList">
+
+                <p>Loading students...</p>
+
+            </div>
+
+        </section>
+
+        <!-- Edit student -->
+        <section class="edit-section" id="editSection">
+
+            <h2>Edit Student</h2>
+
+            <form id="editForm">
+
+                <input type="hidden" id="editId">
+
+                <label for="editStudentId">Student ID</label>
+
+                <input
+                    type="text"
+                    id="editStudentId"
+                    readonly
+                >
+
+                <label for="editFirstname">First Name</label>
+
+                <input
+                    type="text"
+                    id="editFirstname"
+                    required
+                >
+
+                <label for="editLastname">Last Name</label>
+
+                <input
+                    type="text"
+                    id="editLastname"
+                    required
+                >
+
+                <label for="editMatricNumber">Matric Number</label>
+
+                <input
+                    type="text"
+                    id="editMatricNumber"
+                    required
+                >
+
+                <label for="editEmail">Email Address</label>
+
+                <input
+                    type="email"
+                    id="editEmail"
+                    required
+                >
+
+                <label for="editPhone">Phone Number</label>
+
+                <input
+                    type="tel"
+                    id="editPhone"
+                    required
+                >
+
+                <label for="editDateofbirth">Date of Birth</label>
+
+                <input
+                    type="date"
+                    id="editDateofbirth"
+                    required
+                >
+
+                <label for="editGender">Gender</label>
+
+                <select id="editGender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label for="editAddress">Home Address</label>
+
+                <textarea
+                    id="editAddress"
+                    required
+                ></textarea>
+
+                <div class="edit-buttons">
+
+                    <button type="submit">
+                        Update Student
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelEdit"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="./students.js"></script>
+
+</body>
+
+</html>

@@ -1,78 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="./student-icon.png">
-    <title>Student Management System</title>
 
-    <link rel="stylesheet" href="./style.css">
+    <title>Bright Future Academy</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="home-page">
 
-    <header>
-        <nav>
-            <h1>Student Management System</h1>
+    <!-- Navigation -->
+    <header class="home-header">
+
+        <nav class="home-nav">
+
+            <a href="./index.html" class="school-brand">
+
+                <div class="school-logo">
+                    🎓
+                </div>
+
+                <div class="school-name">
+                    <h1>Bright Future Academy</h1>
+
+                    <p>Learn Today, Lead Tomorrow</p>
+                </div>
+
+            </a>
 
             <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contacts</a>
+
+                <a href="./index.html" class="active">
+                    Home
+                </a>
+
+                <!-- <a href="./about.html"> -->
+                    <!-- About -->
+                <!-- </a> -->
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+                <a href="./admin.html" class="admin-login-link">
+                    Admin Login
+                </a>
+
             </div>
+
         </nav>
+
     </header>
 
+    <!-- Main content -->
     <main>
-        <section class="registration">
-            <h2>Register Student</h2>
 
-            <form>
+        <!-- Hero section -->
+        <section class="hero-section">
 
-                <label for="firstname">Firstname</label>
-                <input 
-                    type="text" 
-                    id="firstname" 
-                    name="firstname"
-                    placeholder="Enter firstname"
-                >
+            <div class="hero-overlay"></div>
 
-                <label for="lastname">Lastname</label>
-                <input 
-                    type="text" 
-                    id="lastname" 
-                    name="lastname"
-                    placeholder="Enter lastname"
-                >
+            <div class="hero-content">
 
-                <label for="phone">Phone Number</label>
-                <input 
-                    type="tel" 
-                    id="phone" 
-                    name="phone"
-                    placeholder="Enter phone number"
-                >
+                <div class="hero-logo">
+                    🎓
+                </div>
 
-                <label for="dateofbirth">Date of Birth</label>
-                <input 
-                    type="date" 
-                    id="dateofbirth" 
-                    name="dateofbirth"
-                >
+                <h2>
+                    Bright Future Academy
+                </h2>
 
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender">
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+                <div class="motto">
 
-                <button type="submit">Register a Student</button>
+                    <span></span>
 
-            </form>
+                    <p>
+                        Learn Today, Lead Tomorrow
+                    </p>
+
+                    <span></span>
+
+                </div>
+
+                <p class="hero-description">
+
+                    A modern school management system designed
+                    to make education simple, organized and
+                    effective.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="./registration.html" class="get-started-button">
+                        Get Started →
+                    </a>
+
+                    <a href="./about.html" class="learn-more-button">
+                        Learn More
+                    </a>
+
+                </div>
+
+            </div>
+
         </section>
+
+        <!-- Features -->
+        <section class="features-section">
+
+            <div class="home-feature">
+
+                <div class="feature-icon">
+                    🎓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Quality Education
+                    </h3>
+
+                    <p>
+                        Building brighter futures.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="home-feature">
+
+                <div class="feature-icon">
+                    👨‍🎓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Student Success
+                    </h3>
+
+                    <p>
+                        Every student matters.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="home-feature">
+
+                <div class="feature-icon">
+                    📚
+                </div>
+
+                <div>
+
+                    <h3>
+                        Better Tomorrow
+                    </h3>
+
+                    <p>
+                        Knowledge for a brighter future.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
     </main>
 
 </body>
+
 </html>
