@@ -4,6 +4,10 @@ const newMessages = document.getElementById("newMessages");
 const repliedMessages = document.getElementById("repliedMessages");
 const logoutButton = document.getElementById("logoutButton");
 
+// Deployed backend URL
+const API_URL =
+    "https://final-full-stack-project-1.onrender.com";
+
 // Get admin token
 const token = localStorage.getItem("adminToken");
 
@@ -14,6 +18,7 @@ if (!token) {
 
 // Logout
 logoutButton.addEventListener("click", function () {
+
     localStorage.removeItem("adminToken");
 
     alert("You have been logged out!");
@@ -23,10 +28,12 @@ logoutButton.addEventListener("click", function () {
 
 // Load dashboard data
 async function loadDashboard() {
+
     try {
+
         // Get students
         const studentsResponse = await fetch(
-            "http://localhost:3000/students",
+            `${API_URL}/students`,
             {
                 headers: {
                     Authorization: "Bearer " + token
@@ -36,7 +43,7 @@ async function loadDashboard() {
 
         // Get messages
         const messagesResponse = await fetch(
-            "http://localhost:3000/contacts",
+            `${API_URL}/contacts`,
             {
                 headers: {
                     Authorization: "Bearer " + token
@@ -51,6 +58,7 @@ async function loadDashboard() {
             messagesResponse.status === 401 ||
             messagesResponse.status === 403
         ) {
+
             localStorage.removeItem("adminToken");
 
             window.location.href = "./admin.html";
@@ -58,34 +66,63 @@ async function loadDashboard() {
             return;
         }
 
-        const students = await studentsResponse.json();
-        const messages = await messagesResponse.json();
+        // Check for server errors
+        if (
+            !studentsResponse.ok ||
+            !messagesResponse.ok
+        ) {
+
+            throw new Error(
+                "Failed to load dashboard data"
+            );
+        }
+
+        const students =
+            await studentsResponse.json();
+
+        const messages =
+            await messagesResponse.json();
 
         // Display total students
-        totalStudents.textContent = students.length;
+        totalStudents.textContent =
+            students.length;
 
         // Display total messages
-        totalMessages.textContent = messages.length;
+        totalMessages.textContent =
+            messages.length;
 
         // Count replied messages
-        const replied = messages.filter(function (message) {
-            return message.reply && message.reply.trim() !== "";
-        });
+        const replied =
+            messages.filter(function (message) {
+
+                return (
+                    message.reply &&
+                    message.reply.trim() !== ""
+                );
+            });
 
         // Count new messages
-        const newMessagesCount = messages.filter(function (message) {
-            return !message.reply || message.reply.trim() === "";
-        });
+        const newMessagesCount =
+            messages.filter(function (message) {
 
-        repliedMessages.textContent = replied.length;
+                return (
+                    !message.reply ||
+                    message.reply.trim() === ""
+                );
+            });
 
-        newMessages.textContent = newMessagesCount.length;
+        repliedMessages.textContent =
+            replied.length;
+
+        newMessages.textContent =
+            newMessagesCount.length;
 
     } catch (error) {
+
         console.error(error);
 
         alert(
-            "Unable to load dashboard data. Make sure the server is running."
+            "Unable to load dashboard data. Please try again."
         );
     }
 }
