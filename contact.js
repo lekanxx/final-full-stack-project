@@ -1,7 +1,12 @@
 const contactForm = document.getElementById("contactForm");
 
+// Your deployed backend URL
+const API_URL =
+    "https://final-full-stack-project-1.onrender.com";
+
 // Send contact message
 contactForm.addEventListener("submit", async function (event) {
+
     event.preventDefault();
 
     const name = document
@@ -20,8 +25,9 @@ contactForm.addEventListener("submit", async function (event) {
         .trim();
 
     try {
+
         const response = await fetch(
-            "http://localhost:3000/contacts",
+            `${API_URL}/contacts`,
             {
                 method: "POST",
 
@@ -40,18 +46,29 @@ contactForm.addEventListener("submit", async function (event) {
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message);
 
-            // Clear the form
+            alert(
+                data.message ||
+                "Your message has been sent successfully!"
+            );
+
+            // Clear form
             contactForm.reset();
 
         } else {
-            alert(data.message || "Failed to send message");
+
+            alert(
+                data.message ||
+                "Failed to send message"
+            );
         }
 
     } catch (error) {
+
         console.error(error);
 
-        alert("Unable to connect to the server");
+        alert(
+            "Unable to connect to the server"
+        );
     }
 });
